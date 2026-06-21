@@ -8,12 +8,9 @@
 <meta name="apple-mobile-web-app-title" content="Vibe">
 <meta name="theme-color" content="#f2f2f7">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
-<link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120.png?v=4">
-<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png?v=4">
-<link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png?v=4">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=4">
-<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png?v=4">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=5">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=5">
+<link rel="apple-touch-icon-precomposed" href="icons/apple-touch-icon.png?v=5">
 <link rel="manifest" href="manifest.json?v=4">
 <title>Vibe</title>
 
@@ -26,6 +23,7 @@
   --radius:10px;--radius-sm:8px;--radius-lg:12px;
   --shadow:0 1px 3px rgba(0,0,0,.04);
   --shadow-md:0 2px 8px rgba(0,0,0,.06);
+  --glass-bg:rgba(255,255,255,.55);--glass-border:rgba(255,255,255,.35);--glass-blur:blur(16px) saturate(1.8);
 }
 body.dark{
   --bg:#000000;--card:#1c1c1e;--border:#2c2c2e;--border2:#3a3a3c;
@@ -33,13 +31,14 @@ body.dark{
   --t1:#ffffff;--t2:#ebebf5;--t3:#8e8e93;--t4:#636366;--red:#ff453a;
   --shadow:0 1px 3px rgba(0,0,0,.2);
   --shadow-md:0 2px 8px rgba(0,0,0,.3);
+  --glass-bg:rgba(28,28,30,.6);--glass-border:rgba(255,255,255,.08);--glass-blur:blur(16px) saturate(1.8);
 }
 body.dark{background:#000000}
-body.dark .hero{background:var(--card)}
+body.dark .hero{background:var(--glass-bg);border-color:var(--glass-border)}
 body.dark .sub-header{background:var(--card)}
-body.dark .header{background:rgba(0,0,0,.85)}
-body.dark .search-inner{background:#2c2c2e;border-color:#3a3a3c}
-body.dark .folder-card{background:var(--card)}
+body.dark .header{background:rgba(0,0,0,.65);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur)}
+body.dark .search-inner{background:rgba(44,44,46,.6);border-color:var(--glass-border)}
+body.dark .folder-card{background:var(--glass-bg);border-color:var(--glass-border)}
 body.dark .mini-wrap{background:var(--card);border-top:1px solid var(--border)}
 body.dark .btn-outline{background:var(--card);color:var(--t1);border-color:var(--border2)}
 body.dark .np-bg-white{background:var(--bg)}
@@ -59,41 +58,46 @@ img{display:block}
 .header{
   display:flex;align-items:center;justify-content:space-between;
   padding:0 16px 10px;padding-top:max(env(safe-area-inset-top),16px);
-  background:rgba(242,242,247,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;
+  background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  border-bottom:1px solid var(--glass-border);position:sticky;top:0;z-index:10;
 }
 .header-brand{display:flex;align-items:center;gap:10px}
-.header-icon{width:32px;height:32px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.header-icon{width:32px;height:32px;border-radius:8px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.header-icon img{width:100%;height:100%;object-fit:cover;border-radius:8px}
 .app-title{font-size:20px;font-weight:700;letter-spacing:-.4px;color:var(--t1)}
 .header-btns{display:flex;gap:6px}
 .icon-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--accent);transition:background .15s;flex-shrink:0;background:transparent}
 .icon-btn:active{background:rgba(0,0,0,.06)}
 .search-wrap{padding:10px 16px 6px;background:var(--bg)}
-.search-inner{display:flex;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;gap:8px}
+.search-inner{display:flex;align-items:center;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--radius-sm);padding:9px 12px;gap:8px;backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur)}
 .search-inner input{flex:1;border:none;outline:none;font-size:15px;color:var(--t1);background:transparent}
 .search-inner input::placeholder{color:var(--t3)}
 .search-clear-btn{color:var(--t3);display:flex;padding:2px;cursor:pointer}
 .hero{
   margin:12px 16px 4px;border-radius:var(--radius-lg);overflow:hidden;
-  background:var(--card);padding:20px;position:relative;
-  border:1px solid var(--border);
+  background:var(--glass-bg);padding:20px;position:relative;
+  border:1px solid var(--glass-border);
+  backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  box-shadow:0 4px 24px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.4);
 }
 .hero-inner{position:relative;z-index:1;display:flex;align-items:center;gap:14px}
-.hero-icon-wrap{width:64px;height:64px;border-radius:16px;overflow:hidden;flex-shrink:0;background:var(--accent);display:flex;align-items:center;justify-content:center}
-.hero-icon-wrap svg{width:32px;height:32px;color:#fff}
+.hero-icon-wrap{width:56px;height:56px;border-radius:14px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.hero-icon-wrap img{width:100%;height:100%;object-fit:cover;border-radius:14px}
 .hero-text{flex:1}
 .hero-title{font-size:26px;font-weight:800;color:var(--t1);letter-spacing:-.5px}
 .hero-sub{font-size:12px;color:var(--t3);margin-top:2px}
 .hero-stats{display:flex;gap:8px;margin-top:12px}
-.hero-chip{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:5px 12px;display:flex;align-items:center;gap:5px;cursor:pointer}
+.hero-chip{background:rgba(255,255,255,.45);border:1px solid var(--glass-border);border-radius:20px;padding:5px 12px;display:flex;align-items:center;gap:5px;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .hero-chip-num{font-size:14px;font-weight:700;color:var(--t1)}
 .hero-chip-label{font-size:11px;color:var(--t3)}
 .stats-row{display:flex;align-items:center;justify-content:space-between;padding:8px 20px 4px}
 .folder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:6px 12px}
 .folder-card{
   height:45px;display:flex;flex-direction:column;justify-content:center;
-  background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);
-  padding:0 8px;cursor:pointer;transition:transform .12s;overflow:hidden;
+  background:var(--glass-bg);border-radius:var(--radius-sm);border:1px solid var(--glass-border);
+  padding:0 8px;cursor:pointer;transition:transform .12s,box-shadow .15s;overflow:hidden;
+  backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  box-shadow:0 2px 12px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,.3);
 }
 .folder-card:active{transform:scale(.96)}
 .folder-name{font-size:11.5px;font-weight:600;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -245,7 +249,7 @@ input[type=range].vol::-webkit-slider-thumb{-webkit-appearance:none;width:20px;h
 <script>
 'use strict';
 (()=>{
-const ICON=`data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#ff375f"/><rect x="20" y="18" width="8" height="28" rx="4" fill="#fff"/><rect x="36" y="12" width="8" height="40" rx="4" fill="#fff"/><rect x="28" y="22" width="8" height="20" rx="4" fill="#fff"/></svg>')}`;
+const ICON='icons/icon-190.png';
 const I={
   play:  `<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>`,
   pause: `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.5"/><rect x="14" y="4" width="4" height="16" rx="1.5"/></svg>`,
@@ -442,14 +446,6 @@ function scrLibrary(){
       </div>
     </div>
     ${!q?`<div class="hero">
-      
-      <div class="hero-inner">
-        <div class="hero-icon-wrap"><img src="${ICON}" alt="Vibe"></div>
-        <div class="hero-text">
-          <div class="hero-title">Vibe</div>
-          <div class="hero-sub">Your Music Library</div>
-        </div>
-      </div>
       <div class="hero-stats">
         <div class="hero-chip"><span class="hero-chip-num">${S.artists.length}</span><span class="hero-chip-label">Artists</span></div>
         <div class="hero-chip"><span class="hero-chip-num">${S.songs.length}</span><span class="hero-chip-label">Songs</span></div>
@@ -464,7 +460,7 @@ function scrLibrary(){
       </div>
     </div>
     <div class="scroll-area" id="lib-content">${q?scrSearch(filtered,songs):scrFolders()}</div>`;}
-function scrEmpty(){return`<div class="center-fill" style="padding-top:max(env(safe-area-inset-top),20px)"><img src="${ICON}" style="width:100px;height:100px;border-radius:28px" alt="Vibe"><div><div style="font-size:30px;font-weight:800;color:var(--accent);letter-spacing:-1px">Vibe</div><div style="font-size:14px;color:var(--t3);margin-top:5px">Your Music Library</div></div><button class="btn-primary" data-action="import-music" style="width:100%;max-width:280px">${I.plus} <span>Add Music Folder</span></button><div style="font-size:13px;color:var(--t3);max-width:240px;line-height:1.5">Select your Music folder &mdash; artists and albums import automatically</div></div>`;}
+function scrEmpty(){return`<div class="center-fill" style="padding-top:max(env(safe-area-inset-top),20px)"><img src="${ICON}" style="width:100px;height:100px;border-radius:24px;box-shadow:0 8px 32px rgba(255,55,95,.25)" alt="Vibe"><div><div style="font-size:30px;font-weight:800;color:var(--accent);letter-spacing:-1px">Vibe</div><div style="font-size:14px;color:var(--t3);margin-top:5px">Your Music Library</div></div><button class="btn-primary" data-action="import-music" style="width:100%;max-width:280px">${I.plus} <span>Add Music Folder</span></button><div style="font-size:13px;color:var(--t3);max-width:240px;line-height:1.5">Select your Music folder &mdash; artists and albums import automatically</div></div>`;}
 function getArtistOrder(){
   try{const o=JSON.parse(localStorage.getItem('vibe-order')||'null');return Array.isArray(o)?o:null;}catch{return null;}
 }
